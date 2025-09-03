@@ -37,7 +37,7 @@
                 </StackPanel>
                 <StackPanel Spacing="5">
                     <TextBlock Text="Size" VerticalAlignment="Center" HorizontalAlignment="Left" />
-                    <TextBox Text="{Binding SizeText}" Name="VariantEditSize" Watermark="Size of the variant" />
+                    <TextBox Text="{Binding Size}" Name="VariantEditSize" Watermark="Size of the variant" />
                 </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Spacing="10">

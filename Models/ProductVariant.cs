@@ -3,6 +3,11 @@ using System.Drawing;
 
 namespace ApricotProducts.Models;
 
+/// <summary>
+/// Represents a variant of a <see cref="Product">product</see>.
+/// </summary>
+/// <seealso cref="Product" />
+/// <seealso cref="ProductVariantSelected" />
 public class ProductVariant
 {
     public Color Color { get; set; }

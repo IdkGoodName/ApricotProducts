@@ -1,8 +1,8 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using ReactiveUI;
+﻿using ReactiveUI;
 
 namespace ApricotProducts.ViewModels;
 
-public class ViewModelBase : ReactiveObject
-{
-}
+/// <summary>
+/// Represents the base for all view models of the application.
+/// </summary>
+public class ViewModelBase : ReactiveObject { }

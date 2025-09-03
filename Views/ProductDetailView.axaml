@@ -65,7 +65,7 @@
                                     <CheckBox IsChecked="{Binding IsSelected}" />
                                     <Border Background="{Binding ColorBrush}" Width="24" Height="24" CornerRadius="24" />
                                     <TextBlock Text="{Binding Name}" VerticalAlignment="Center" HorizontalAlignment="Left" />
-                                    <TextBlock Text="{Binding SizeText}" VerticalAlignment="Center" HorizontalAlignment="Left" Classes="Dimmed" />
+                                    <TextBlock Text="{Binding Size}" VerticalAlignment="Center" HorizontalAlignment="Left" Classes="Dimmed" />
                                 </StackPanel>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>

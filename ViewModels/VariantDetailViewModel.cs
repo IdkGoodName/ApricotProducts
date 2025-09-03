@@ -12,6 +12,15 @@ using ReactiveUI;
 
 namespace ApricotProducts.ViewModels;
 
+/// <summary>
+/// Represents the page for editing and creating <see cref="Models.ProductVariant">product variants</see>.
+/// </summary>
+/// <param name="parent">The parent window of the page</param>
+/// <param name="name">The name of the product variant</param>
+/// <param name="size">The size of the product variant</param>
+/// <param name="color">The color of the product variant</param>
+/// <param name="productVariant">The product variant being edited</param>
+/// <seealso cref="ProductDetailViewModel" />
 public sealed partial class VariantDetailViewModel(MainWindowViewModel parent, string name, ProductSize size, System.Drawing.Color color, ProductVariant? productVariant = null)
     : PageViewModelBase(parent), INotifyDataErrorInfo
 {
@@ -32,14 +41,29 @@ public sealed partial class VariantDetailViewModel(MainWindowViewModel parent, s
     #endregion
 
     #region Properties (GET/SET)
+    /// <summary>
+    /// Gets the name of the <see cref="Models.ProductVariant">product variant</see>.
+    /// </summary>
     public string Name { get; set; } = name;
 
+    /// <summary>
+    /// Gets the size of the <see cref="Product">product</see>.
+    /// </summary>
     public ProductSize Size { get; set; } = size;
 
+    /// <summary>
+    /// Gets the Avalonia color of the <see cref="Product">product</see>.
+    /// </summary>
     public Color VariantColor => new(255, R, G, B);
 
+    /// <summary>
+    /// Gets the Avalonia color brush of the <see cref="Product">product</see>.
+    /// </summary>
     public IBrush ColorBrush => new SolidColorBrush(VariantColor);
 
+    /// <summary>
+    /// Gets the red channel value of the <see cref="VariantColor">product's color</see>.
+    /// </summary>
     public byte R
     {
         get => _r;
@@ -50,6 +74,9 @@ public sealed partial class VariantDetailViewModel(MainWindowViewModel parent, s
         }
     }
 
+    /// <summary>
+    /// Gets the green channel value of the <see cref="VariantColor">product's color</see>.
+    /// </summary>
     public byte G
     {
         get => _g;
@@ -60,6 +87,9 @@ public sealed partial class VariantDetailViewModel(MainWindowViewModel parent, s
         }
     }
 
+    /// <summary>
+    /// Gets the blue channel value of the <see cref="VariantColor">product's color</see>.
+    /// </summary>
     public byte B
     {
         get => _b;
@@ -70,8 +100,17 @@ public sealed partial class VariantDetailViewModel(MainWindowViewModel parent, s
         }
     }
 
+    /// <summary>
+    /// Gets the <see cref="Models.ProductVariant">product variant</see> being managed.
+    /// </summary>
     public ProductVariant? ProductVariant { get; private set; } = productVariant;
 
+    /// <summary>
+    /// Gets the <see cref="Size"> of the <see cref="Product">product</see> in the text form.
+    /// </summary>
+    /// <remarks>
+    /// <para>This is primarily used in the inputs of the GUI</para>
+    /// </remarks>
     public string SizeText
     {
         get => _sizeText;
@@ -85,6 +124,9 @@ public sealed partial class VariantDetailViewModel(MainWindowViewModel parent, s
         }
     }
 
+    /// <summary>
+    /// Gets whether any of the form inputs contains a faulty value.
+    /// </summary>
     public bool HasErrors
     {
         get => _hasErrors;
@@ -93,12 +135,27 @@ public sealed partial class VariantDetailViewModel(MainWindowViewModel parent, s
     #endregion
 
     #region Properties(GET only)
+    /// <summary>
+    /// Gets whether the <c>Save</c> button in the UI is enabled.
+    /// </summary>
+    /// <remarks>
+    /// <para>For now, the save button is always enabled once form inputs have no errors.</para>
+    /// </remarks>
     public bool IsSaveButtonEnabled => !HasErrors;
 
+    /// <summary>
+    /// Gets whether the product variant is being created (<see langword="true" />) or is being edited(<see langword="false" />).
+    /// </summary>
     public bool IsNew => ProductVariant is null;
 
+    /// <summary>
+    /// Gets the GUI header text of the page.
+    /// </summary>
     public string PageHeader => IsNew ? "Variant Creation Form" : "Variant Edit Form";
 
+    /// <summary>
+    /// Gets the GUI description text of the page.
+    /// </summary>
     public string PageDescription =>
         IsNew
         ? "You're currently creating a new product variant. Click save to create the product variant."
@@ -106,15 +163,31 @@ public sealed partial class VariantDetailViewModel(MainWindowViewModel parent, s
     #endregion
 
     #region Events
+    /// <summary>
+    /// Represents an event whether errors have changed.
+    /// </summary>
+    /// <remarks>
+    /// <para>This never gets fired in this code, as the property changes re-doing the error checks is enough.</para>
+    /// </remarks>
     public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
     #endregion
 
     #region Constructors
+    /// <summary>
+    /// Initializes a new page with a <paramref name="productVariant">product variant</paramref> that is being edited.
+    /// </summary>
+    /// <param name="parent">The parent window of the page</param>
+    /// <param name="productVariant">The product variant being edited</param>
     public VariantDetailViewModel(MainWindowViewModel parent, ProductVariant productVariant) : this(parent, productVariant.Name, productVariant.Size, productVariant.Color, productVariant) =>
         ProductVariant = productVariant;
     #endregion
 
     #region Methods
+    /// <summary>
+    /// Gets whether the new property values have any errors.
+    /// </summary>
+    /// <param name="propertyName">The name of the property that has updated</param>
+    /// <returns>Whether the <paramref name="propertyName">given property</paramref> has any errors</returns>
     public IEnumerable GetErrors(string? propertyName)
     {
         if (propertyName is null)
@@ -143,6 +216,9 @@ public sealed partial class VariantDetailViewModel(MainWindowViewModel parent, s
         return errors;
     }
 
+    /// <summary>
+    /// Disposes the page.
+    /// </summary>
     public override void Dispose() { }
 
     [RelayCommand]
