@@ -1,0 +1,123 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:heroIcons="clr-namespace:HeroIconsAvalonia.Controls;assembly=HeroIconsAvalonia"
+             xmlns:uc="using:ApricotProducts.UserControls"
+             xmlns:vm="using:ApricotProducts.ViewModels"
+             xmlns:model="using:ApricotProducts.Models"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="ApricotProducts.Views.ProductListView"
+             x:DataType="vm:ProductListViewModel">
+    
+    <Design.DataContext>
+        <vm:ProductListViewModel/>
+    </Design.DataContext>
+
+    <!-- <StackPanel Margin="20" Spacing="30">
+        <StackPanel Spacing="20">
+            <StackPanel Spacing="10" Orientation="Horizontal">
+                <heroIcons:HeroIcon Foreground="White" Type="MagnifyingGlass" Min="True" />
+                <TextBox Watermark="Search products" Name="ProductSearch" Width="400" />
+            </StackPanel>
+
+            <StackPanel Spacing="10" Orientation="Horizontal">                
+                <Button Command="{Binding PromptAddProductCommand}">
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <heroIcons:HeroIcon Foreground="White" Type="Plus" Min="True" />
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Add</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Flyout="{StaticResource ProductEditMenu}">
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <heroIcons:HeroIcon Foreground="White" Type="AdjustmentsHorizontal" Min="True" />
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Filter</TextBlock>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+            <TextBlock
+                Text="{Binding #ProductSearch.Text, StringFormat='Showing products matching `{0}`', TargetNullValue='Showing all products'}"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left"
+                />
+        </StackPanel> -->
+    <!-- Product list -->
+    <ScrollViewer>
+        <StackPanel Margin="20" Spacing="30">
+            <StackPanel Spacing="10">
+                <TextBlock FontWeight="Bold" FontSize="24">Product list</TextBlock>
+                <Button Command="{Binding PromptAddProductCommand}">
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <heroIcons:HeroIcon Foreground="White" Type="Plus" Min="True" />
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Add</TextBlock>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+
+            <DataGrid
+                Name="ProductListGrid"
+                ItemsSource="{Binding Products}"
+                IsReadOnly="True"
+                CanUserReorderColumns="True"
+                CanUserResizeColumns="True"
+                CanUserSortColumns="True"
+            >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="8*" Header="Name" Binding="{Binding Name}" />
+
+                    <!-- DataGridTextColumn, but with displayed euro sign (or local currency) -->
+                    <DataGridTemplateColumn Width="2*" Header="Price">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate DataType="model:Product">
+                                <TextBlock Text="{Binding Price, StringFormat='{}{0}€'}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTextColumn Width="10*" Header="Description" Binding="{Binding Description}" />
+
+                    <DataGridTemplateColumn Width="10*" Header="Variants">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate DataType="model:Product">
+                                <Panel>
+                                    <StackPanel IsVisible="{Binding HasVariants}" Orientation="Horizontal" Spacing="7">
+                                        <Border Background="{Binding Variants[0].ColorBrush}" Width="24" Height="24" CornerRadius="24" />
+                                        <TextBlock Text="{Binding Variants[0].Name}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                        <TextBlock Text="{Binding Variants[0].Size}" VerticalAlignment="Center" HorizontalAlignment="Center" Classes="Dimmed" />
+                                        <StackPanel Orientation="Horizontal" Spacing="3" IsVisible="{Binding HasMoreThanOneVariant}">
+                                            <TextBlock Text="and" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                            <TextBlock Text="{Binding VariantPlusMore}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                            <TextBlock Text="more" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <StackPanel IsVisible="{Binding !HasVariants}" Orientation="Horizontal" Spacing="5">
+                                        <TextBlock Text="No variants" VerticalAlignment="Center" HorizontalAlignment="Center" Classes="Dimmed" />
+                                    </StackPanel>
+                                </Panel>
+                                
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridCheckBoxColumn Width="2*" Header="Listed" Binding="{Binding IsListed}" />
+
+                    <DataGridTemplateColumn Width="2*" Header=" ">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate DataType="model:Product">
+                                <StackPanel Orientation="Horizontal" Spacing="1">
+                                    <Button Command="{Binding #ProductListGrid.((vm:ProductListViewModel)DataContext).ViewProductCommand}" CommandParameter="{Binding .}">
+                                        <heroIcons:HeroIcon Type="Pencil" Foreground="White" Min="True" />
+                                    </Button>
+                                    <Button Command="{Binding #ProductListGrid.((vm:ProductListViewModel)DataContext).PromptRemoveProductCommand}" CommandParameter="{Binding .}">
+                                        <heroIcons:HeroIcon Type="Trash" Foreground="White" Min="True" />
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+    </ScrollViewer>
+    <!-- </StackPanel> -->
+</UserControl>

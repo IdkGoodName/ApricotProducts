@@ -1,0 +1,224 @@
+<Styles xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style Selector="TextBlock.Dimmed">
+        <Setter Property="Foreground" Value="#888" />
+    </Style>
+
+    <Style Selector="Border.ModalBorder">
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="BorderBrush" Value="#555" />
+    </Style>
+
+    <Style Selector="Border.ModalSeparator">
+        <Setter Property="Background" Value="#555" />
+    </Style>
+
+    <Style Selector="Button">
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Background" Value="#222" />
+
+        <Style Selector="^:pointerover">
+            <Setter Property="Background" Value="#2f2f2f" />
+        </Style>
+        <Style Selector="^:pressed">
+            <Setter Property="Background" Value="#3f3f3f" />
+        </Style>
+        <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#2f2f2f" />
+            <Setter Property="BorderBrush" Value="transparent" />
+        </Style>
+        <Style Selector="^:pressed /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="#3f3f3f" />
+        </Style>
+    </Style>
+
+    <Style Selector="CheckBox">
+        <Style Selector="^ /template/ Border#NormalRectangle">
+            <Setter Property="BorderBrush"
+                Value="#2f2f2f" />
+            <Setter Property="Background"
+                Value="#222" />
+        </Style>
+
+        <Style Selector="^:pointerover">
+            <Style Selector="^ /template/ Border#NormalRectangle">
+                <Setter Property="BorderBrush"
+                    Value="#333" />
+                <Setter Property="Background"
+                    Value="#2f2f2f" />
+            </Style>
+
+            <Style Selector="^ /template/ Path#CheckGlyph">
+                <Setter Property="Fill"
+                    Value="#4f4f4f" />
+            </Style>
+        </Style>
+
+        <Style Selector="^:disabled">
+            <Style Selector="^ /template/ Border#NormalRectangle">
+                <Setter Property="BorderBrush"
+                    Value="#333" />
+                <Setter Property="Background"
+                    Value="#1f1f1f" />
+            </Style>
+        </Style>
+
+        <Style Selector="^:checked">
+            <Style Selector="^ /template/ Border#NormalRectangle">
+                <Setter Property="BorderBrush"
+                    Value="#3309ff49" />
+                <Setter Property="Background"
+                    Value="#3309ff49" />
+            </Style>
+
+            <Style Selector="^ /template/ Path#CheckGlyph">
+                <Setter Property="Fill"
+                    Value="#09ff49" />
+                <Setter Property="Data" Value="{StaticResource CheckMarkPathData}" />
+                <Setter Property="Width" Value="9" />
+                <Setter Property="Opacity" Value="1" />
+            </Style>
+
+            <!-- Checked PointerOver State -->
+            <Style Selector="^:pointerover">
+                <Style Selector="^ /template/ Border#NormalRectangle">
+                    <Setter Property="BorderBrush"
+                        Value="#5509ff49" />
+                    <Setter Property="Background"
+                        Value="#5509ff49" />
+                </Style>
+
+                <Style Selector="^ /template/ Path#CheckGlyph">
+                    <Setter Property="Fill"
+                        Value="#09ff49" />
+                </Style>
+            </Style>
+
+            <!-- Checked Pressed State -->
+            <Style Selector="^:pressed">
+                <Style Selector="^ /template/ Border#NormalRectangle">
+                    <Setter Property="BorderBrush"
+                        Value="#8809ff49" />
+                    <Setter Property="Background"
+                        Value="#8809ff49" />
+                </Style>
+
+                <Style Selector="^ /template/ Path#CheckGlyph">
+                    <Setter Property="Fill"
+                        Value="#09ff49" />
+                </Style>
+            </Style>
+
+            <!-- Checked Disabled State -->
+            <Style Selector="^:disabled">
+                <Style Selector="^ /template/ Border#NormalRectangle">
+                    <Setter Property="BorderBrush"
+                        Value="#8809ff49" />
+                    <Setter Property="Background"
+                        Value="#8809ff49" />
+                </Style>
+
+                <Style Selector="^ /template/ Path#CheckGlyph">
+                    <Setter Property="Fill"
+                        Value="#09ff49" />
+                </Style>
+            </Style>
+        </Style>
+    </Style>
+
+    <Style Selector="TextBox">
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="BorderBrush" Value="transparent" />
+        <Setter Property="Background" Value="#1a1a1a" />
+
+        <!-- Normal -->
+        <Style Selector="^:pointerover">
+            <Setter Property="Background" Value="#1f1f1f" />
+            <Setter Property="BorderBrush" Value="transparent" />
+            <Setter Property="Foreground" Value="white" />
+        </Style>
+        <Style Selector="^:pressed">
+            <Setter Property="Background" Value="#3a3a3a" />
+            <Setter Property="Foreground" Value="white" />
+        </Style>
+        <Style Selector="^:focus">
+            <Setter Property="Background" Value="#222" />
+            <Setter Property="Foreground" Value="white" />
+        </Style>
+        <!-- Normal border element -->
+        <Style Selector="^:pointerover /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="#1f1f1f" />
+            <Setter Property="BorderBrush" Value="transparent" />
+        </Style>
+        <Style Selector="^:pressed /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="#2f2f2f" />
+        </Style>
+        <Style Selector="^:focus /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="#222" />
+            <Setter Property="BorderBrush" Value="transparent" />
+        </Style>
+        <!-- Error -->
+         <Style Selector="^:error">
+            <Setter Property="Background" Value="#33ff0949" />
+            <Setter Property="BorderBrush" Value="transparent" />
+            <Setter Property="Foreground" Value="#ff0949" />
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+        <Style Selector="^:error:pointerover">
+            <Setter Property="Background" Value="#55ff0949" />
+            <Setter Property="BorderBrush" Value="transparent" />
+            <Setter Property="Foreground" Value="#ff0949" />
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+        <Style Selector="^:error:pressed">
+            <Setter Property="Background" Value="#88ff0949" />
+            <Setter Property="Foreground" Value="#ff0949" />
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+        <Style Selector="^:error:focus">
+            <Setter Property="Background" Value="#55ff0949" />
+            <Setter Property="Foreground" Value="#ff0949" />
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+        <!-- Error border element -->
+        <Style Selector="^:error:pointerover /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="#55ff0949" />
+            <Setter Property="BorderBrush" Value="transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+        <Style Selector="^:error:pressed /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="#88ff0949" />
+            <Setter Property="BorderBrush" Value="transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+        <Style Selector="^:error:focus /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="#55ff0949" />
+            <Setter Property="BorderBrush" Value="transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+    </Style>
+
+    <Style Selector="NumericUpDown">
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="BorderBrush" Value="transparent" />
+        <Setter Property="Background" Value="#1a1a1a" />
+
+        <Style Selector="^:pointerover">
+            <Setter Property="Background" Value="#2a2a2a" />
+            <Setter Property="BorderBrush" Value="transparent" />
+            <Setter Property="Foreground" Value="white" />
+        </Style>
+        <Style Selector="^:pressed">
+            <Setter Property="Background" Value="#3a3a3a" />
+            <Setter Property="Foreground" Value="white" />
+        </Style>
+        <Style Selector="^:pointerover /template/ ButtonSpinner#PART_Spinner">
+            <Setter Property="Background" Value="#1f1f1f" />
+            <Setter Property="BorderBrush" Value="transparent" />
+        </Style>
+        <Style Selector="^:pressed /template/ ButtonSpinner#PART_Spinner">
+            <Setter Property="Background" Value="#2f2f2f" />
+        </Style>
+    </Style>
+</Styles>

@@ -1,0 +1,68 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:heroIcons="clr-namespace:HeroIconsAvalonia.Controls;assembly=HeroIconsAvalonia"
+             xmlns:uc="using:ApricotProducts.UserControls"
+             xmlns:vm="using:ApricotProducts.ViewModels"
+             xmlns:model="using:ApricotProducts.Models"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="ApricotProducts.Views.ProductDeletionView"
+             x:DataType="vm:ProductDeletionViewModel">
+  
+    <Design.DataContext>
+        <vm:ProductDetailViewModel/>
+    </Design.DataContext>
+
+    <Border Margin="100" Classes="ModalBorder">
+        <Grid Classes="Modal">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="1" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="1" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <StackPanel Margin="20" Grid.Column="0" Grid.Row="0">
+                <TextBlock Text="{Binding PageHeader}" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" />
+            </StackPanel>
+            <Border Height="1" Classes="ModalSeparator" Grid.Column="0" Grid.Row="1" />
+            <StackPanel Margin="20" Grid.Column="0" Grid.Row="2" Spacing="20">
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left">Once deleted, the product cannot be restored.</TextBlock>
+                <StackPanel Spacing="10" IsVisible="{Binding HasVariants}">
+                    <TextBlock Text="Variants" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" />
+                    <ScrollViewer>
+                        <ItemsControl ItemsSource="{Binding Variants}" Name="ProductSelectedVariants">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" Spacing="10" Margin="5">
+                                        <Border Background="{Binding ColorBrush}" Width="24" Height="24" CornerRadius="24" />
+                                        <TextBlock Text="{Binding Name}" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                                        <TextBlock Text="{Binding Size}" VerticalAlignment="Center" HorizontalAlignment="Left" Classes="Dimmed" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                    
+                </StackPanel>
+            </StackPanel>
+            <Border Height="1" Classes="ModalSeparator" Grid.Column="0" Grid.Row="3" />
+            <StackPanel Margin="20" Orientation="Horizontal" Spacing="10" Grid.Column="0" Grid.Row="4">
+                <Button Command="{Binding RemoveProductCommand}">
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <heroIcons:HeroIcon Foreground="White" Type="Check" Min="True" />
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Delete</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Command="{Binding GoBackToListCommand}">
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <heroIcons:HeroIcon Foreground="White" Type="XMark" Min="True" />
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Cancel</TextBlock>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Border>
+    
+</UserControl>

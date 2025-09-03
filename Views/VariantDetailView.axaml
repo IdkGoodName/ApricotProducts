@@ -1,0 +1,66 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:heroIcons="clr-namespace:HeroIconsAvalonia.Controls;assembly=HeroIconsAvalonia"
+             xmlns:uc="using:ApricotProducts.UserControls"
+             xmlns:vm="using:ApricotProducts.ViewModels"
+             xmlns:model="using:ApricotProducts.Models"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="ApricotProducts.Views.VariantDetailView"
+             x:DataType="vm:VariantDetailViewModel">
+  
+    <Design.DataContext>
+        <vm:VariantDetailViewModel/>
+    </Design.DataContext>
+
+    <ScrollViewer>
+        <StackPanel Margin="20" Spacing="25">
+            <StackPanel Spacing="10">
+                <TextBlock FontWeight="Bold" FontSize="24" Text="{Binding PageHeader}" />
+                <TextBlock FontSize="16" Text="{Binding PageDescription}" />
+            </StackPanel>
+            
+            <StackPanel Spacing="10">
+                <StackPanel Spacing="5">
+                    <TextBlock Text="Name" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                    <TextBox Text="{Binding Name}" Name="VariantEditName" Watermark="Name of the variant" />
+                </StackPanel>
+                <StackPanel Spacing="5">
+                    <TextBlock Text="Color" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                    <StackPanel Spacing="10" Orientation="Horizontal">
+                        <NumericUpDown Value="{Binding R}" Maximum="255" Minimum="0" Increment="5" FormatString="0" Width="150" />
+                        <NumericUpDown Value="{Binding G}" Maximum="255" Minimum="0" Increment="5" FormatString="0" Width="150" />
+                        <NumericUpDown Value="{Binding B}" Maximum="255" Minimum="0" Increment="5" FormatString="0" Width="150" />
+                    </StackPanel>
+                    <Border Background="{Binding ColorBrush}" Width="64" Height="64" CornerRadius="8" />
+                </StackPanel>
+                <StackPanel Spacing="5">
+                    <TextBlock Text="Size" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                    <TextBox Text="{Binding SizeText}" Name="VariantEditSize" Watermark="Size of the variant" />
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Spacing="10">
+                <Button Command="{Binding AddOrEditVariantCommand}" IsEnabled="{Binding IsSaveButtonEnabled}">
+                    <!-- <Button.CommandParameter>
+                        <MultiBinding>
+                            <Binding Path="Text" ElementName="VariantEditName" />
+                            <Binding Path="Text" ElementName="VariantEditSize" />
+                            <Binding Path="Color" ElementName="VariantEditColor" />
+                        </MultiBinding>
+                    </Button.CommandParameter> -->
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <heroIcons:HeroIcon Foreground="White" Type="Check" Min="True" />
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Save</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Command="{Binding GoBackToListCommand}">
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <heroIcons:HeroIcon Foreground="White" Type="XMark" Min="True" />
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Cancel</TextBlock>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

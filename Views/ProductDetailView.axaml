@@ -1,0 +1,100 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:heroIcons="clr-namespace:HeroIconsAvalonia.Controls;assembly=HeroIconsAvalonia"
+             xmlns:uc="using:ApricotProducts.UserControls"
+             xmlns:vm="using:ApricotProducts.ViewModels"
+             xmlns:model="using:ApricotProducts.Models"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="ApricotProducts.Views.ProductDetailView"
+             x:DataType="vm:ProductDetailViewModel">
+  
+    <Design.DataContext>
+        <vm:ProductDetailViewModel/>
+    </Design.DataContext>
+
+    <ScrollViewer>
+        <StackPanel Margin="20" Spacing="25">
+            <StackPanel Spacing="10">
+                <TextBlock FontWeight="Bold" FontSize="24" Text="{Binding PageHeader}" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                <TextBlock FontSize="16" Text="{Binding PageDescription}" VerticalAlignment="Center" HorizontalAlignment="Left" />
+            </StackPanel>
+            
+            <StackPanel Spacing="10">
+                <StackPanel Spacing="5">
+                    <TextBlock Text="Name" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                    <TextBox Text="{Binding Name}" Name="ProductEditName" Watermark="Name of the product" />
+                </StackPanel>
+                <StackPanel Spacing="5">
+                    <TextBlock Text="Price" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                    <StackPanel Orientation="Horizontal" Spacing="5">
+                        <NumericUpDown Value="{Binding Price}" Name="ProductEditPrice" Maximum="1000" Minimum="0" FormatString="0.00" Increment="0.05" Width="250" />
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">€</TextBlock>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Spacing="5">
+                    <CheckBox IsChecked="{Binding IsListed}" Name="ProductEditListed">Is the product listed?</CheckBox>
+                </StackPanel>
+                <StackPanel Spacing="5">
+                    <TextBlock  Text="Description" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                    <TextBox
+                        Text="{Binding Description}"
+                        Name="ProductEditDescription"
+                        Watermark="Description of the product"
+                        TextWrapping="Wrap"
+                        AcceptsReturn="True"
+                        Height="200"
+                        />
+                </StackPanel>
+                <StackPanel Spacing="5">
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <TextBlock Text="Variants" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                        <Button Command="{Binding PromptAddProductVariantCommand}">
+                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                <heroIcons:HeroIcon Foreground="White" Type="Plus" Min="True" />
+                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Add</TextBlock>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                    
+                    <ItemsControl ItemsSource="{Binding SelectedVariants}" Name="ProductSelectedVariants">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Spacing="10" Margin="5">
+                                    <CheckBox IsChecked="{Binding IsSelected}" />
+                                    <Border Background="{Binding ColorBrush}" Width="24" Height="24" CornerRadius="24" />
+                                    <TextBlock Text="{Binding Name}" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                                    <TextBlock Text="{Binding SizeText}" VerticalAlignment="Center" HorizontalAlignment="Left" Classes="Dimmed" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Spacing="10">
+                <Button Command="{Binding AddOrEditProductCommand}" IsEnabled="{Binding IsSaveButtonEnabled}">
+                    <Button.CommandParameter>
+                        <MultiBinding>
+                            <Binding Path="Text" ElementName="ProductEditName" />
+                            <Binding Path="Value" ElementName="ProductEditPrice" />
+                            <Binding Path="IsChecked" ElementName="ProductEditListed" />
+                            <Binding Path="Text" ElementName="ProductEditDescription" />
+                        </MultiBinding>
+                    </Button.CommandParameter>
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <heroIcons:HeroIcon Foreground="White" Type="Check" Min="True" />
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Save</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Command="{Binding GoBackToListCommand}">
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <heroIcons:HeroIcon Foreground="White" Type="XMark" Min="True" />
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Cancel</TextBlock>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
