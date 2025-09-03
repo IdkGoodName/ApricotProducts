@@ -66,6 +66,12 @@
                                     <Border Background="{Binding ColorBrush}" Width="24" Height="24" CornerRadius="24" />
                                     <TextBlock Text="{Binding Name}" VerticalAlignment="Center" HorizontalAlignment="Left" />
                                     <TextBlock Text="{Binding Size}" VerticalAlignment="Center" HorizontalAlignment="Left" Classes="Dimmed" />
+                                    <Button Command="{Binding #ProductSelectedVariants.((vm:ProductDetailViewModel)DataContext).ViewProductVariantCommand}" CommandParameter="{Binding ProductVariant}">
+                                        <heroIcons:HeroIcon Type="Pencil" Foreground="White" Min="True" />
+                                    </Button>
+                                    <Button Command="{Binding #ProductSelectedVariants.((vm:ProductDetailViewModel)DataContext).RemoveProductVariantCommand}" CommandParameter="{Binding ProductVariant}">
+                                        <heroIcons:HeroIcon Type="Trash" Foreground="White" Min="True" />
+                                    </Button>
                                 </StackPanel>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>

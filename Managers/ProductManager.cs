@@ -82,6 +82,7 @@ public class ProductManager(ObservableCollection<Product> products, ObservableCo
             product.Variants.Remove(productVariant);
 
         this.RaisePropertyChanged(nameof(Products));
+        this.RaisePropertyChanged(nameof(ProductVariants));
     }
     #endregion
 }

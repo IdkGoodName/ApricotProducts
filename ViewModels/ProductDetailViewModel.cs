@@ -132,9 +132,9 @@ public sealed partial class ProductDetailViewModel : PageViewModelBase, INotifyD
             .ToObservableChangeSet()
             .Subscribe(x =>
             {
-                Console.WriteLine("Product list changed");
-                if (x is not null)
-                    SelectedVariants = FromProductVariants(parent.ProductVariants, variants);
+                Console.WriteLine("Product variant list changed");
+                SelectedVariants = FromProductVariants(parent.ProductVariants, variants);
+                this.RaisePropertyChanged(nameof(SelectedVariants));
             });
     }
 
@@ -205,6 +205,14 @@ public sealed partial class ProductDetailViewModel : PageViewModelBase, INotifyD
     [RelayCommand]
     private void PromptAddProductVariant() =>
         Parent.PromptAddProductVariant();
+
+    [RelayCommand]
+    private void ViewProductVariant(ProductVariant productVariant) =>
+        Parent.ViewPageOf(productVariant);
+
+    [RelayCommand]
+    private void RemoveProductVariant(ProductVariant productVariant) =>
+        Parent.ProductManager.RemoveProductVariant(productVariant);
 
     private void AddProduct()
     {

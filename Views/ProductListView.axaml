@@ -86,7 +86,7 @@
                                         <TextBlock Text="{Binding Variants[0].Size}" VerticalAlignment="Center" HorizontalAlignment="Center" Classes="Dimmed" />
                                         <StackPanel Orientation="Horizontal" Spacing="3" IsVisible="{Binding HasMoreThanOneVariant}">
                                             <TextBlock Text="and" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                                            <TextBlock Text="{Binding VariantCount}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                            <TextBlock Text="{Binding VariantPlusMore}" VerticalAlignment="Center" HorizontalAlignment="Center" />
                                             <TextBlock Text="more" VerticalAlignment="Center" HorizontalAlignment="Center" />
                                         </StackPanel>
                                     </StackPanel>
